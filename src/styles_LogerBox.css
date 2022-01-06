@@ -8,6 +8,7 @@
 
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .logerBox > header {
@@ -17,12 +18,63 @@
   font-weight: 600;
 }
 
-.logerBox__value {
-  padding-left: 0.5em;
-  overflow: auto;
-  border-bottom-right-radius: 10px;
+table {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.logerBox__value > * {
+tbody > tr,
+thead > tr,
+tfoot > tr {
+  display: grid;
+  grid-template-columns: 2fr 7fr 2fr 2fr 2fr;
+}
+
+thead,
+tfoot {
+  display: block;
+  /* distance of scroll */
+  padding-right: 17px;
+}
+
+tbody {
+  display: block;
+  overflow-y: scroll;
+  /* for overflow work */
+  height: 1px;
+  flex-grow: 1;
+}
+
+td,
+th {
   padding: 0.25em 0em;
+  text-align: center;
+}
+
+tbody td {
+  background-color: wheat;
+  border-radius: 5px;
+  margin: 0.25em;
+}
+
+tfoot > tr {
+  border-top: 1px dotted black;
+  grid-template-areas: ". . dur cre del";
+}
+
+#sumDur {
+  grid-area: dur;
+}
+#countCreated {
+  grid-area: cre;
+}
+#countDeleted {
+  grid-area: del;
+}
+
+sup {
+  vertical-align: super;
+  font-size: 0.75em;
 }

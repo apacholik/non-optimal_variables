@@ -28,7 +28,30 @@ const LogerBox = () => {
   return (
     <section className="logerBox">
       <header>Loger:</header>
-      <div id={LOGER_ID} className="logerBox__value"></div>
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Duration</th>
+            <th>Created ?</th>
+            <th>Deleted ?</th>
+          </tr>
+        </thead>
+        <tbody
+          id={LOGER_ID}
+          data-created="0"
+          data-deleted="0"
+          data-sum-duration="0"
+        ></tbody>
+        <tfoot>
+          <tr>
+            <td id="sumDur">-</td>
+            <td id="countCreated">0</td>
+            <td id="countDeleted">0</td>
+          </tr>
+        </tfoot>
+      </table>
     </section>
   );
 };

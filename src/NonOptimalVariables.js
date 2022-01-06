@@ -1,12 +1,13 @@
 import log from "./log";
-import { CREATE_VAR, DELETE_VAR } from "./consts";
-import { useRef, useState } from "react";
+import { CREATE_VAR, DELETE_VAR, LOGER_ID } from "./consts";
+import { useEffect, useRef, useState } from "react";
 
 const registry = new FinalizationRegistry((heldValue) => {
   log({
-    desc: `Deleted <i>${heldValue.name}</i> (#${heldValue.no})`,
+    title: heldValue.name,
     created: new Date(),
-    type: DELETE_VAR
+    type: DELETE_VAR,
+    no: heldValue.no
   });
 });
 
@@ -16,44 +17,57 @@ const NonOptimalVariables = () => {
     label: "How many loops to make: "
   };
   const [counter, setCounter] = useState(1);
+  const [isDo, setIsDo] = useState(false);
   const loop = useRef(null);
 
   log({
-    desc: `Created <i>nonOptimalVal</i> (#${counter})`,
+    title: "nonOptimalVal",
     created: new Date(),
-    type: CREATE_VAR
+    type: CREATE_VAR,
+    no: counter
   });
 
   registry.register(nonOptimalVal, {
     no: counter,
-    name: "variable nonOptimalVal"
+    name: "nonOptimalVal"
   });
 
   const startExperiment = () => {
+    const $loger = document.getElementById(LOGER_ID);
+    $loger.innerHTML = "";
+    $loger.dataset.created = 0;
+    $loger.dataset.deleted = 0;
+
     setCounter(1);
-
-    const fingerprint = setInterval(() => {
-      setCounter((currentVal) => {
-        if (currentVal >= loop.current.value - 1) {
-          console.log(currentVal);
-          clearInterval(fingerprint);
-        }
-
-        return currentVal + 1;
-      });
-    }, 50);
+    setIsDo(true);
   };
 
   log({
-    desc: `Created <i>startExperiment</i> (#${counter})`,
+    title: "startExperiment",
     created: new Date(),
-    type: CREATE_VAR
+    type: CREATE_VAR,
+    no: counter
   });
 
   registry.register(startExperiment, {
     no: counter,
-    name: "function startExperiment"
+    name: "startExperiment"
   });
+
+  useEffect(() => {
+    if (isDo) {
+      const fingerprint = setInterval(() => {
+        setCounter((currentVal) => {
+          if (currentVal >= loop.current.value - 1) {
+            clearInterval(fingerprint);
+            setIsDo(false);
+          }
+
+          return currentVal + 1;
+        });
+      }, 1);
+    }
+  }, [isDo]);
 
   return (
     <div>
