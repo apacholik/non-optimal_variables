@@ -1,8 +1,9 @@
+import "./styles_LogerBox.css";
 import { useEffect } from "react";
 import { LOGER_ID } from "./consts";
 
 const moConfig = { attributes: false, childList: true, subtree: false };
-const moCallback = (mutationsList) => {
+const scrollToLastElement = (mutationsList) => {
   const mutation = mutationsList.at(-1);
   const $lastElement = mutation.target.lastChild;
 
@@ -13,7 +14,7 @@ const moCallback = (mutationsList) => {
   }
 };
 
-const domObserver = new MutationObserver(moCallback);
+const domObserver = new MutationObserver(scrollToLastElement);
 
 const LogerBox = () => {
   useEffect(() => {
@@ -25,9 +26,9 @@ const LogerBox = () => {
   }, []);
 
   return (
-    <section className="homeView__logerBox">
+    <section className="logerBox">
       <header>Loger:</header>
-      <div id={LOGER_ID} className="homeView__logerBox__value"></div>
+      <div id={LOGER_ID} className="logerBox__value"></div>
     </section>
   );
 };

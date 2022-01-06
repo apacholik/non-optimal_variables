@@ -1,10 +1,12 @@
 import log from "./log";
+import { CREATE_VAR, DELETE_VAR } from "./consts";
 import { useRef, useState } from "react";
 
 const registry = new FinalizationRegistry((heldValue) => {
   log({
     desc: `Deleted <i>${heldValue.name}</i> (#${heldValue.no})`,
-    created: new Date()
+    created: new Date(),
+    type: DELETE_VAR
   });
 });
 
@@ -18,7 +20,8 @@ const NonOptimalVariables = () => {
 
   log({
     desc: `Created <i>nonOptimalVal</i> (#${counter})`,
-    created: new Date()
+    created: new Date(),
+    type: CREATE_VAR
   });
 
   registry.register(nonOptimalVal, {
@@ -43,7 +46,8 @@ const NonOptimalVariables = () => {
 
   log({
     desc: `Created <i>startExperiment</i> (#${counter})`,
-    created: new Date()
+    created: new Date(),
+    type: CREATE_VAR
   });
 
   registry.register(startExperiment, {
