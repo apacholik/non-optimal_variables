@@ -19,10 +19,26 @@ function bumpSup($cell) {
   }
 }
 
-function log({ created, title, type, no }) {
+function log({ created, title, type, no, experimentId }) {
   const $loger = document.getElementById(LOGER_ID);
+
+  console.table([
+    format(created, "HH:mm:ss.SSS"),
+    experimentId,
+    type,
+    no,
+    title
+  ]);
+
   if ($loger) {
-    const id = `${title}_${no}`;
+    const currentExId = $loger.dataset.exId;
+
+    if (currentExId !== experimentId) {
+      console.info(`Old experiment is a live! ${experimentId}`);
+      return;
+    }
+
+    const id = `${title}_${no}_${experimentId}`;
     let $row = $loger.querySelector(`#${id}`);
 
     if ($row) {
@@ -77,13 +93,14 @@ function log({ created, title, type, no }) {
     $created.innerText = $loger.dataset.created;
     const $deleted = document.getElementById("countDeleted");
     $deleted.innerText = $loger.dataset.deleted;
-  } else {
-    const message = `[${format(
-      created,
-      "HH:mm:ss.SSS"
-    )}] ${type} #${no} ${title}`;
-    console.info("Loger element isn'n created yet. Message:", message);
   }
+  // else {
+  // const message = `[${format(
+  //   created,
+  //   "HH:mm:ss.SSS"
+  // )}] ${type} #${no} ${title}`;
+  // console.info("Loger element isn'n created yet. Message:", message);
+  // }
 }
 
 export default log;

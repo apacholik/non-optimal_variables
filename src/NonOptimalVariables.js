@@ -1,13 +1,15 @@
-import log from "./log";
-import { CREATE_VAR, DELETE_VAR, LOGER_ID } from "./consts";
 import { useEffect, useRef, useState } from "react";
+import { CREATE_VAR, DELETE_VAR, LOGER_ID } from "./consts";
+import log from "./log";
+import { v4 as uuid } from "uuid";
 
 const registry = new FinalizationRegistry((heldValue) => {
   log({
     title: heldValue.name,
     created: new Date(),
     type: DELETE_VAR,
-    no: heldValue.no
+    no: heldValue.no,
+    experimentId: heldValue.experimentId
   });
 });
 
@@ -19,17 +21,20 @@ const NonOptimalVariables = () => {
   const [counter, setCounter] = useState(1);
   const [isDo, setIsDo] = useState(false);
   const loop = useRef(null);
+  const uuidRef = useRef(uuid());
 
   log({
     title: "nonOptimalVal",
     created: new Date(),
     type: CREATE_VAR,
-    no: counter
+    no: counter,
+    experimentId: uuidRef.current
   });
 
   registry.register(nonOptimalVal, {
     no: counter,
-    name: "nonOptimalVal"
+    name: "nonOptimalVal",
+    experimentId: uuidRef.current
   });
 
   const startExperiment = () => {
@@ -37,6 +42,8 @@ const NonOptimalVariables = () => {
     $loger.innerHTML = "";
     $loger.dataset.created = 0;
     $loger.dataset.deleted = 0;
+    $loger.dataset.exId = uuid();
+    uuidRef.current = $loger.dataset.exId;
 
     setCounter(1);
     setIsDo(true);
@@ -46,12 +53,14 @@ const NonOptimalVariables = () => {
     title: "startExperiment",
     created: new Date(),
     type: CREATE_VAR,
-    no: counter
+    no: counter,
+    experimentId: uuidRef.current
   });
 
   registry.register(startExperiment, {
     no: counter,
-    name: "startExperiment"
+    name: "startExperiment",
+    experimentId: uuidRef.current
   });
 
   useEffect(() => {
