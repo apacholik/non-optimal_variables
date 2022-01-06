@@ -1,0 +1,34 @@
+.homeView {
+  width: 100%;
+  max-width: 500px;
+  padding: 0em 0.5em;
+}
+
+.homeView__logerBox {
+  border: 2px solid black;
+  border-radius: 10px;
+
+  width: 100%;
+  height: 300px;
+  margin: 0.5em 0em;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.homeView__logerBox > header {
+  border-bottom: 1px dotted black;
+  line-height: 1.75;
+  padding-left: 0.5em;
+  font-weight: 600;
+}
+
+.homeView__logerBox__value {
+  padding-left: 0.5em;
+  overflow: auto;
+  border-bottom-right-radius: 10px;
+}
+
+.homeView__logerBox__value > * {
+  padding: 0.25em 0em;
+}
