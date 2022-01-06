@@ -13,11 +13,12 @@ const registry = new FinalizationRegistry((heldValue) => {
   });
 });
 
+const nonOptimalVal = {
+  counter: 1_000_000,
+  label: "How many loops to make: "
+};
+
 const NonOptimalVariables = () => {
-  const nonOptimalVal = {
-    counter: 1_000_000,
-    label: "How many loops to make: "
-  };
   const [counter, setCounter] = useState(1);
   const [isDo, setIsDo] = useState(false);
   const loop = useRef(null);
@@ -29,7 +30,7 @@ const NonOptimalVariables = () => {
     experimentId: uuidRef.current
   });
 
-  const startExperiment = () => {
+  const startExperiment = useCallback(() => {
     const $loger = document.getElementById(LOGER_ID);
     $loger.innerHTML = "";
     $loger.dataset.created = 0;
@@ -39,7 +40,7 @@ const NonOptimalVariables = () => {
 
     setCounter(1);
     setIsDo(true);
-  };
+  }, []);
 
   registry.register(startExperiment, {
     no: counter,
