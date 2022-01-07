@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { CREATE_VAR, DELETE_VAR, LOGER_ID } from "./consts";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { DELETE_VAR, LOGER_ID } from "./consts";
 import log from "./log";
 import { v4 as uuid } from "uuid";
 
@@ -23,14 +23,6 @@ const NonOptimalVariables = () => {
   const loop = useRef(null);
   const uuidRef = useRef(uuid());
 
-  log({
-    title: "nonOptimalVal",
-    created: new Date(),
-    type: CREATE_VAR,
-    no: counter,
-    experimentId: uuidRef.current
-  });
-
   registry.register(nonOptimalVal, {
     no: counter,
     name: "nonOptimalVal",
@@ -48,14 +40,6 @@ const NonOptimalVariables = () => {
     setCounter(1);
     setIsDo(true);
   };
-
-  log({
-    title: "startExperiment",
-    created: new Date(),
-    type: CREATE_VAR,
-    no: counter,
-    experimentId: uuidRef.current
-  });
 
   registry.register(startExperiment, {
     no: counter,
