@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { DELETE_VAR, LOGER_ID } from "./consts";
+import { DELETE_VAR } from "./consts";
 import "./styles_NonOptimalVariables.css";
 import log from "./log";
 import { v4 as uuid } from "uuid";
@@ -31,10 +31,7 @@ const NonOptimalVariables = () => {
   });
 
   const startExperiment = () => {
-    // const $loger = document.getElementById(LOGER_ID);
-    // $loger.innerHTML = "";
     uuidRef.current = uuid();
-    // $loger.dataset.exId = uuidRef.current
 
     setCounter(1);
     setIsDo(true);
