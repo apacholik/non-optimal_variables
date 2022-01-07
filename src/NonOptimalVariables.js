@@ -31,12 +31,10 @@ const NonOptimalVariables = () => {
   });
 
   const startExperiment = () => {
-    const $loger = document.getElementById(LOGER_ID);
-    $loger.innerHTML = "";
-    $loger.dataset.created = 0;
-    $loger.dataset.deleted = 0;
-    $loger.dataset.exId = uuid();
-    uuidRef.current = $loger.dataset.exId;
+    // const $loger = document.getElementById(LOGER_ID);
+    // $loger.innerHTML = "";
+    uuidRef.current = uuid();
+    // $loger.dataset.exId = uuidRef.current
 
     setCounter(1);
     setIsDo(true);

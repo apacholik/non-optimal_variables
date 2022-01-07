@@ -18,63 +18,48 @@
   font-weight: 600;
 }
 
-table {
-  width: 100%;
-  height: 100%;
+#LOGER_ID {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+}
+
+#LOGER_ID > * {
+  width: 1.5em;
+
   display: flex;
   flex-direction: column;
 }
 
-tbody > tr,
-thead > tr,
-tfoot > tr {
-  display: grid;
-  grid-template-columns: 2fr 7fr 2fr;
+#LOGER_ID > *:first-child {
+  margin-left: 0.25em;
 }
 
-thead,
-tfoot {
-  display: block;
-  /* distance of scroll */
-  padding-right: 17px;
-}
-
-tbody {
-  display: block;
-  overflow-y: scroll;
-  /* for overflow work */
-  height: 1px;
+.measure {
   flex-grow: 1;
+  max-height: calc(100% - 5.5em);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  border-bottom: 2px dotted black;
+  padding-right: 0.25em;
+  margin-bottom: 0.25em;
 }
 
-td,
-th {
-  padding: 0.25em 0em;
-  text-align: center;
+.measure > * {
+  background-color: magenta;
+  width: 100%;
 }
 
-tbody td {
-  background-color: wheat;
-  border-radius: 5px;
-  margin: 0.25em;
-}
-
-tfoot > tr {
-  border-top: 1px dotted black;
-  grid-template-areas: ". . dur cre del";
-}
-
-#sumDur {
-  grid-area: dur;
-}
-#countCreated {
-  grid-area: cre;
-}
-#countDeleted {
-  grid-area: del;
-}
-
-sup {
-  vertical-align: super;
-  font-size: 0.75em;
+.label-y {
+  transform-origin: 0.45em 0.5em;
+  transform: rotate(90deg);
+  width: 4.9em;
+  height: 1em;
+  overflow: hidden;
+  text-overflow: clip;
+  font-family: monospace;
 }
