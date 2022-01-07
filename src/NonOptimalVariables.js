@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DELETE_VAR, LOGER_ID } from "./consts";
+import "./styles_NonOptimalVariables.css";
 import log from "./log";
 import { v4 as uuid } from "uuid";
 
@@ -64,6 +65,10 @@ const NonOptimalVariables = () => {
 
   return (
     <div>
+      <label htmlFor="loop">Current experiment uuid:</label>{" "}
+      <input id="loop" size="40" readOnly value={uuidRef.current} type="text" />
+      <br />
+      <br />
       <label htmlFor="loop">{nonOptimalVal.label}</label>
       <input
         id="loop"
