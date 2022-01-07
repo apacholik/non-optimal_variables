@@ -31,23 +31,14 @@ const LogerBox = () => {
       <table>
         <thead>
           <tr>
-            <th>No</th>
+            <th>Counter value</th>
             <th>Name</th>
-            <th>Duration</th>
-            <th>Created ?</th>
             <th>Deleted ?</th>
           </tr>
         </thead>
-        <tbody
-          id={LOGER_ID}
-          data-created="0"
-          data-deleted="0"
-          data-sum-duration="0"
-        ></tbody>
+        <tbody id={LOGER_ID} data-deleted="0"></tbody>
         <tfoot>
           <tr>
-            <td id="sumDur">-</td>
-            <td id="countCreated">0</td>
             <td id="countDeleted">0</td>
           </tr>
         </tfoot>

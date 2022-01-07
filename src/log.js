@@ -1,12 +1,10 @@
-import { LOGER_ID, CREATE_VAR, DELETE_VAR } from "./consts";
+import { LOGER_ID, DELETE_VAR } from "./consts";
 import { format } from "date-fns";
 
 const idxRowMaper = {
   no: 1,
   title: 2,
-  duration: 3,
-  isCreated: 4,
-  isDeleted: 5
+  isDeleted: 3
 };
 
 function bumpSup($cell) {
@@ -43,18 +41,6 @@ function log({ created, title, type, no, experimentId }) {
 
     if ($row) {
       switch (type) {
-        case CREATE_VAR: {
-          const $cell = $row.querySelector(
-            `td:nth-child(${idxRowMaper.isCreated})`
-          );
-
-          if ($cell.innerHTML === "-") {
-            $cell.innerHTML = "X";
-          } else {
-            bumpSup($cell);
-          }
-          break;
-        }
         case DELETE_VAR: {
           const $cell = $row.querySelector(
             `td:nth-child(${idxRowMaper.isDeleted})`
@@ -76,21 +62,15 @@ function log({ created, title, type, no, experimentId }) {
       $row.innerHTML = `
         <td>${no}</td>
         <td>${title}</td>
-        <td>-</td>
-        <td>${CREATE_VAR === type ? "X" : "-"}</td>
         <td>${DELETE_VAR === type ? "X" : "-"}</td>
       `;
       $loger.appendChild($row);
 
-      if (CREATE_VAR === type) {
-        $loger.dataset.created = Number($loger.dataset.created) + 1;
-      } else if (DELETE_VAR === type) {
+      if (DELETE_VAR === type) {
         $loger.dataset.deleted = Number($loger.dataset.deleted) + 1;
       }
     }
 
-    const $created = document.getElementById("countCreated");
-    $created.innerText = $loger.dataset.created;
     const $deleted = document.getElementById("countDeleted");
     $deleted.innerText = $loger.dataset.deleted;
   }
