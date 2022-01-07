@@ -1,5 +1,4 @@
-import { LOGER_ID, DELETE_VAR } from "./consts";
-import { format } from "date-fns";
+import { LOGER_ID } from "./consts";
 
 export const logerStateManager = (() => {
   const state = {
@@ -59,8 +58,6 @@ export const logerStateManager = (() => {
       syncExElements();
     }
   };
-
-  window.APgetState = () => state;
 
   return {
     create: createIfNo,
